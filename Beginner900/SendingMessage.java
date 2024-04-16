@@ -3,9 +3,7 @@ package Beginner900;
 import java.util.Scanner;
 import java.util.Vector;
 
-/**
- * SendingMessage
- */
+
 public class SendingMessage {
     static Scanner sc = new Scanner(System.in);
 

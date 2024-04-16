@@ -2,9 +2,7 @@ package Beginner900;
 
 import java.util.Scanner;
 
-/**
- * UnNaturalLanguageProcessing
- */
+
 public class UnNaturalLanguageProcessing {
 
     public static void main(String[] args) {
