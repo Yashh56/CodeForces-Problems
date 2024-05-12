@@ -6,6 +6,7 @@ using namespace std;
 #define pi 2 * acos(0.0)
 #define yes cout << "YES" << endl;
 #define no cout << "NO" << endl;
+#define z cout << 0 << endl;
 
 // Control Flow
 #define FOR(i, a, b) for (int i = a; i < (b); i++)
@@ -41,32 +42,31 @@ void solve()
     int n;
     cin >> n;
     vi a(n);
+    int ans = INT_MIN;
     for (int i = 0; i < n; i++)
     {
         cin >> a[i];
     }
-
-    for (int i = 0; i < n; i++)
+    if (n == 1)
     {
-        if (a[i] == 1)
-        {
-            a[i]++;
-        }
+        z;
+        return;
+    }
+    for (int i = 1; i < n; i++)
+    {
+        ans = max(ans, a[i - 1] - a[i]);
     }
 
     for (int i = 1; i < n; i++)
     {
-        if (a[i] % a[i - 1] == 0)
-        {
-            a[i]++;
-        }
+        ans = max(ans, a[i] - a[0]);
+    }
+    for (int i = 0; i < n - 1; i++)
+    {
+        ans = max(ans, a[n - 1] - a[i]);
     }
 
-    for (auto i : a)
-    {
-        cout << i << " ";
-    }
-    cout << nl;
+    cout << ans << nl;
 }
 
 int main()
