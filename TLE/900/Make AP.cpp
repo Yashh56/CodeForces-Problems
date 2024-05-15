@@ -14,7 +14,7 @@ using namespace std;
 #define FORd(i, a, b) for (int i = (b) - 1; i >= a; i--)
 #define F0Rd(i, a) for (int i = (a) - 1; i >= 0; i--)
 #define trav(a, x) for (auto &a : x)
-// #define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
+#define uid(a, b) uniform_int_distribution<int>(a, b)(rng)
 
 // Types
 #define ui unsigned int
@@ -38,29 +38,29 @@ bool even(ll num) { return ((num & 1) == 0); }
 
 void solve()
 {
-    int n, cnt = 0;
-    cin >> n;
-    map<int, int> q;
+    int a, b, c;
+    cin >> a >> b >> c;
 
-    for (int i = 0; i < n; i++)
+    int new_a = b - (c - b);
+    if (new_a >= a and new_a % a == 0 and new_a != 0)
     {
-        int x;
-        cin >> x;
-        q[x]++;
+        yes;
+        return;
     }
-    int am = 0;
-    for (auto &[x, y] : q)
+    int new_b = a + (c - a) / 2;
+    if (new_b >= b and (c - a) % 2 == 0 and new_b % b == 0 and new_b != 0)
     {
-        am = max(am, y);
+        yes;
+        return;
     }
-    int ans = 0;
-    while (am < n)
+    int new_c = a + 2 * (b - a);
+    if (new_c >= c and new_c % c == 0 and new_c != 0)
     {
-        int d = min(n - am, am);
-        ans += 1 + d;
-        am += d;
+        yes;
+        return;
     }
-    cout << ans << nl;
+    no;
+    return;
 }
 
 int main()
