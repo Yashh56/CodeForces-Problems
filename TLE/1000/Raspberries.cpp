@@ -37,27 +37,44 @@ bool even(ll num) { return ((num & 1) == 0); }
 
 void solve()
 {
-    string s;
-    cin >> s;
-    int n = len(s);
-    int ones = count(all(s), '1');
-    int zeros = n - ones;
-    int i;
-    for ( i = 0; i < n; i++)
+    int n, k;
+    cin >> n >> k;
+    vi a(n);
+    for (int i = 0; i < n; i++)
     {
-        if (s[i] == '0')
-                if (ones > 0)
-                         ones--;
-                else
-                        break;
-        else 
-                if (zeros > 0)
-                        zeros--;
-                else
-                        break;
+        cin >> a[i];
+    }
+    int d = k - 1;
+    int e_cnt = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (even(a[i]))
+            e_cnt++;
+        if (a[i] % k == 0)
+            d = 0;
+        else
+            d = min(d, k - a[i] % k);
     }
 
-    cout << n - i << nl;
+    if (k != 4)
+    {
+        cout << d << nl;
+    }
+    else
+    {
+        if (e_cnt >= 2)
+        {
+            cout << 0 << nl;
+        }
+        else if (e_cnt == 1)
+        {
+            cout << min(d, 1) << nl;
+        }
+        else
+        {
+            cout << min(2, d) << nl;
+        }
+    }
 }
 
 int main()
