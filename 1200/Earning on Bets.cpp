@@ -32,46 +32,54 @@ using namespace std;
 #define pb push_back
 #define all(n) n.begin(), n.end()
 #define rall(n) n.rbegin(), n.rend()
-bool odd(ll num) { return ((num & 1) == 1); }
-bool even(ll num) { return ((num & 1) == 0); }
-
-const int MOD = 1e9 + 7;
 
 void solve()
 {
-    ll n, k;
-    cin >> n >> k;
+    ll n;
+    cin >> n;
     vll a(n);
-    for (auto &i : a)
-        cin >> i;
-    ll sum = 0, S = 0, cur = 0;
-    for (ll i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        sum += a[i];
-        cur += a[i];
-        cur = max(cur, 0LL);
-        S = max(S, cur);
+        cin >> a[i];
     }
-    sum = (sum % MOD + MOD) % MOD;
-    S = S % MOD;
-    ll t = 1;
+    ll lc = a[0];
 
-    for (ll i = 0; i < k; i++)
+    for (int i = 1; i < n; i++)
     {
-        t = t * 2 % MOD;
+        lc = lc * ((a[i])) / gcd(lc, a[i]);
     }
-    ll ans = (sum + S * t - S + MOD) % MOD;
 
-    cout << ans << nl;
+    ll ans[n];
+    ll sum = 0;
+    ll minn = 1e12;
+
+    for (int i = 0; i < n; i++)
+    {
+        ans[i] = lc / a[i];
+        sum += ans  [i];
+        minn = min(minn, a[i] * ans[i]);
+    }
+
+    if (sum < minn)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            cout << ans[i] << " ";
+        }
+        cout << nl;
+    }
+    else
+    {
+        cout << -1 << nl;
+    }
 }
 
 int main()
 {
     int t;
     cin >> t;
-    while (t--)
+    while (t-- > 0)
     {
         solve();
     }
-    return 0;
 }
